@@ -164,7 +164,7 @@ function addItem( product, quantity ) {
     for (let i = 0; i < cart.length; i += 1) {
         total += cart[i].price * cart[i].quantity
     }
-    console.log(`Total in cart: $${total}`)
+    console.log(`The total price in total: $${total}`)
 };
 ```
 
@@ -220,7 +220,7 @@ function addItem( product, quantity ) {
     }
     let amountWithTax = (total + taxRate).toFixed(2)
 
-    console.log(`Total in cart: $${amountWithTax} with a sales tax of $${taxRate.toFixed(2)}`)
+    console.log(`The total price in total: $${amountWithTax} includes a sales tax of $${taxRate.toFixed(2)}`)
 };
 ```
 

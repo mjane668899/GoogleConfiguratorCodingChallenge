@@ -41,9 +41,11 @@ function showItem() {
     for (let i = 0; i < cart.length; i += 1) {
         total += cart[i].price * cart[i].quantity
     }
-    console.log(`Total in cart: $${total}`)
+    console.log(`The total price in total: $${total.toFixed(2)}`)
 }
 
+addItem("shampoo", 5);
+showItem()
 
 // Step 2: Add additional products of the same type to the shopping cart.
 // Given :
@@ -87,7 +89,7 @@ function showItem() {
     for (let i = 0; i < cart.length; i += 1) {
         total += cart[i].price * cart[i].quantity
     }
-    console.log(`Total in cart: $${total}`)
+    console.log(`The total price in total: $${total}`)
 }
 
 addItem("shampoo", 3);
@@ -142,7 +144,6 @@ function showItem() {
     for (let i = 0; i < cart.length; i += 1) {
         total += cart[i].price * cart[i].quantity
     }
-    console.log(total)
 
     let taxRate = 0
     for (let i = 0; i < cart.length; i += 1) {
@@ -150,7 +151,7 @@ function showItem() {
     }
     let amountWithTax = (total + taxRate).toFixed(2)
 
-    console.log(`Total in cart: $${amountWithTax} with a sales tax of $${taxRate.toFixed(2)}`)
+    console.log(`The total price in total: $${amountWithTax} includes a sales tax of $${taxRate.toFixed(2)}.`)
 }
 
 addItem("shampoo", 2);
