@@ -61,7 +61,7 @@ function showItem() {
 const cart = [];
 const name = { 'shampoo': 49.99 };
 
-function addItem(product, quantity) {
+function addItem( product, quantity ) {
     for (let i = 0; i < cart.length; i += 1) {
         if (cart[i].product === product) {
             cart[i].quantity += quantity
