@@ -6,6 +6,9 @@ const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 
+const PORT = 3080;
+const HOST = '0.0.0.0';
+
 const db = mysql.createConnection({
   user: 'root',
   host: 'localhost',
@@ -180,6 +183,5 @@ app.delete('/deletesetting/:id', (req, res) => {
 });
 
 
-app.listen(3001, () => {
-  console.log("Yay, your server is running")
-});
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
