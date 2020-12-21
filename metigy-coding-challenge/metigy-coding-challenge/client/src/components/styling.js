@@ -14,11 +14,13 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    margin: theme.spacing(1),
     flexGrow: 100,
   },
 
@@ -31,31 +33,47 @@ const useStyles = makeStyles((theme) => ({
     width: 400,
   },
 
-  paperinner: {
+  papermargin: {
+    marginTop: theme.spacing(3),
     padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
 
+  paperinner: {
+    padding: theme.spacing(2),
+    textAlign: 'space-around',
+    color: theme.palette.text.secondary,
+  },
+
   papersetting: {
+    margin: theme.spacing(1),
     height: 855,
     width: 790,
+  },
+
+  typography: {
+    marginTop: theme.spacing(2),
   },
 
   control: {
     padding: theme.spacing(2),
   },
+
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: '20ch',
   },
+
   demo: {
     backgroundColor: theme.palette.background.paper,
   },
+
   title: {
     margin: theme.spacing(4, 0, 2),
   },
+
 }));
 
 function generate(element) {
@@ -76,6 +94,7 @@ Styling.Grid = function StylingGrid({ children, ...restProps }) {
 };
 
 Styling.Gridcontainer = function StylingGridcontainer({ children, ...restProps }) {
+  const matches = useMediaQuery('(min-width:600px)');
   return <Grid container zeroMinWidth spacing={1} {...restProps}>{children}</Grid>;
 };
 
@@ -118,12 +137,18 @@ Styling.PaperInner = function StylingPaperInner ({children, ...restProps}) {
   return <Paper className={classes.paperinner} display="inline" style={{ width: '100%' }} {...restProps}>{children}</Paper>;
 };
 
+Styling.PaperMargin = function StylingPaperMargin ({children, ...restProps}) {
+  const classes = useStyles();
+  return <Paper className={classes.papermargin} display="inline" style={{ width: '100%' }} {...restProps}>{children}</Paper>;
+};
+
 Styling.Title = function StylingTitle({ children, ...restProps }) {
   return <Typography variant="h4" gutterBottom {...restProps}>{children}</Typography>;
 };
 
 Styling.Typography = function StylingTypography({ children, ...restProps }) {
-  return <Typography component="div" {...restProps}>{children}</Typography>;
+  const classes = useStyles();
+  return <Typography className={classes.typography} component="div" {...restProps}>{children}</Typography>;
 };
 
 Styling.Box = function StylingBox({ children, ...restProps }) {

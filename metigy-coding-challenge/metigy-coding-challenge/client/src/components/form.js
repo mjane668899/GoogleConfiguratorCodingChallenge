@@ -36,21 +36,31 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+
   control: {
     padding: theme.spacing(2),
   },
+
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(3),
     width: '10ch',
   },
+
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    minWidth: 100,
   },
+
+  formControlText: {
+    margin: theme.spacing(1),
+    maxWidth: theme.spacing,
+  },
+
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+
   '& .MuiTextField-root': {
       margin: theme.spacing(1),
       width: 150,
@@ -71,7 +81,6 @@ Form.Control= function Formcontrol ({ children, ...restProps }) {
   return <FormControl className={classes.formControl} {...restProps}>{children}</FormControl>;
 };
 
-
 Form.ControlLabel = function FormcontrolLabel ({ children, ...restProps }) {
   const [state, setState] = React.useState({
     checkedA: false,
@@ -83,8 +92,13 @@ Form.ControlLabel = function FormcontrolLabel ({ children, ...restProps }) {
   return <FormControlLabel control={<Checkbox checked={state.checkedA} onChange={handleChange} name="checkedA" value={state.checkedA} />}  {...restProps}></FormControlLabel>;
 };
 
+Form.ControlText= function FormcontrolText ({ children, ...restProps }) {
+  const classes = useStyles();
+  return <FormControl className={classes.formControlText} {...restProps}>{children}</FormControl>;
+};
+
 Form.InputLabel = function ForminputLabel ({ children, ...restProps }) {
-  return <InputLabel id="demo-simple-select-label" {...restProps}>{children}</InputLabel>
+  return <InputLabel shrink id="demo-simple-select-placeholder-label-label" {...restProps}>{children}</InputLabel>
 };
 
 Form.Select = function FormSelect ({ children, ...restProps }) {
@@ -102,10 +116,8 @@ Form.Select = function FormSelect ({ children, ...restProps }) {
   const handleOpen = () => {
     setOpen(true);
   };
-
-  return <Select labelId="demo-simple-select-label"
-  id="demo-simple-select" open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange} value={age} displayEmpty className={classes.selectEmpty} inputProps={{ 'aria-label': 'Without label' }}
-  {...restProps}>{children}</Select>
+  return <Select labelId="demo-simple-select-placeholder-label-label"
+  id="demo-simple-select-placeholder-label" onChange={handleChange} displayEmpty className={classes.selectEmpty} inputProps={{ 'aria-label': 'Without label' }} displayEmpty className={classes.selectEmpty} inputProps={{ 'aria-label': 'Without label' }} {...restProps}>{children}</Select>
 };
 
 Form.Menu = function FormMenu ({ children, ...restProps }) {

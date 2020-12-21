@@ -134,11 +134,11 @@ export function SettingBoard({children}) {
         <Styling.PaperSetting key={item.id}>
           <Styling.Gridcontainer justify="center">
             <Styling.Emptygrid item xs={8}>
-              <Styling.PaperInner>
+              <Styling.PaperMargin>
                 <Form.Group row>
                   <Form.ControlLabel onClick={(event) => {
                     setChrome(event.target.value);
-                  }} label="Chrome" checked={item.chrome} value={item.chrome}></Form.ControlLabel>
+                  }} label="Chrome" ></Form.ControlLabel>
                   <Form.ControlLabel onClick={(event) => {
                     setFirefox(event.target.value);
                   }}  label="Firefox"></Form.ControlLabel>
@@ -152,43 +152,51 @@ export function SettingBoard({children}) {
                     setOpera(event.target.value);
                   }} label="Opera"></Form.ControlLabel>
                 </Form.Group>
-              </Styling.PaperInner>
+              </Styling.PaperMargin>
             </Styling.Emptygrid>
             <Styling.Emptygrid item xs={2}>
-              <Styling.PaperInner>
+              <Styling.PaperMargin>
                 <Form.Group row>
                   <Form.ControlLabel onClick={(event) => {
                     setIncognito(event.target.value);
                   }} label="Incognito"></Form.ControlLabel>
                 </Form.Group>
-              </Styling.PaperInner>
+              </Styling.PaperMargin>
             </Styling.Emptygrid>
             <Styling.Emptygrid item xs={10} >
               <Styling.PaperInner>
-                <Form display="inline">
-                  <Styling.Typography display="inline">Wait</Styling.Typography>
-                  <Form.Control>
-                    <Form.InputLabel>minutes</Form.InputLabel>
-                    <Form.Select value={item.minuteTargetSite} onClick={(event) => {
-                      setMinuteTargetSite(event.target.value);
-                    }}>
-                      <Form.Menu value={10}>10</Form.Menu>
-                      <Form.Menu value={20}>20</Form.Menu>
-                      <Form.Menu value={30}>30</Form.Menu>
-                    </Form.Select>
-                  </Form.Control>
-                  <Form.Control>
-                    <Form.InputLabel>seconds</Form.InputLabel>
-                    <Form.Select value={item.secondTargetSite} onClick={(event) => {
-                      setSecondTargetSite(event.target.value);
-                    }}>
-                      <Form.Menu value={10}>10</Form.Menu>
-                      <Form.Menu value={20}>20</Form.Menu>
-                      <Form.Menu value={30}>30</Form.Menu>
-                    </Form.Select>
-                  </Form.Control>
-                  <Styling.Typography >seconds on the targeted websites.</Styling.Typography>
-                </Form>
+                <div>
+                  <Form display="inline">
+                    <Form.ControlText marginLeft="0">
+                      <Styling.Typography>Wait</Styling.Typography>
+                    </Form.ControlText>
+                    <Form.Control>
+                      <Form.InputLabel>minutes</Form.InputLabel>
+                      <Form.Select onClick={(event) => {
+                          setMinuteTargetSite(event.target.value);
+                        }}>
+                        <Form.DisableMenu>{item.minuteTargetSite}</Form.DisableMenu>
+                        <Form.Menu value={10}>10</Form.Menu>
+                        <Form.Menu value={20}>20</Form.Menu>
+                        <Form.Menu value={30}>30</Form.Menu>
+                      </Form.Select>
+                    </Form.Control>
+                    <Form.Control>
+                      <Form.InputLabel>seconds</Form.InputLabel>
+                      <Form.Select onClick={(event) => {
+                          setSecondTargetSite(event.target.value);
+                        }}>
+                        <Form.DisableMenu>{item.secondTargetSite}</Form.DisableMenu>
+                        <Form.Menu value={10}>10</Form.Menu>
+                        <Form.Menu value={20}>20</Form.Menu>
+                        <Form.Menu value={30}>30</Form.Menu>
+                      </Form.Select>
+                    </Form.Control>
+                    <Form.Control>
+                      <Styling.Typography >seconds on the targeted websites.</Styling.Typography>
+                    </Form.Control>
+                  </Form>
+                </div>
                 <Styling.Emptygrid item xs={8}>
                   <Form.Group row>
                     <Form.ControlLabel onClick={(event) => {
@@ -199,9 +207,10 @@ export function SettingBoard({children}) {
                 <Form>
                   <Form.Control>
                     <Form.InputLabel>pages</Form.InputLabel>
-                    <Form.Select value={item.pages} onClick={(event) => {
+                    <Form.Select onClick={(event) => {
                       setPages(event.target.value);
                     }}>
+                      <Form.DisableMenu>{item.pages}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
@@ -209,9 +218,10 @@ export function SettingBoard({children}) {
                   </Form.Control>
                   <Form.Control>
                     <Form.InputLabel>minutes</Form.InputLabel>
-                    <Form.Select value={item.visitMinute} onClick={(event) => {
+                    <Form.Select onClick={(event) => {
                       setVisitMinute(event.target.value);
-                    }}>>
+                    }}>
+                      <Form.DisableMenu>{item.visitMinute}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
@@ -219,25 +229,29 @@ export function SettingBoard({children}) {
                   </Form.Control>
                   <Form.Control>
                     <Form.InputLabel>seconds</Form.InputLabel>
-                    <Form.Select value={item.visitSecond} onClick={(event) => {
+                    <Form.Select onClick={(event) => {
                       setVisitSecond(event.target.value);
-                    }}>>
+                    }}>
+                      <Form.DisableMenu>{item.visitSecond}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
                     </Form.Select>
                   </Form.Control>
-                  <Form.Control>
+                  <Form.ControlText>
                     <Styling.Typography>visit from to second</Styling.Typography>
-                  </Form.Control>
+                  </Form.ControlText>
                 </Form>
                 <Form>
-                  <Styling.Typography>After the operation is complete</Styling.Typography>
+                  <Form.Control>
+                    <Styling.Typography>After the operation is complete</Styling.Typography>
+                  </Form.Control>
                   <Form.Control>
                     <Form.InputLabel>minutes</Form.InputLabel>
-                    <Form.Select value={item.minuteAfterComplete} onClick={(event) => {
+                    <Form.Select onClick={(event) => {
                       setMinuteAfterComplete(event.target.value);
                     }}>
+                      <Form.DisableMenu>{item.minuteAfterComplete}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
@@ -245,53 +259,65 @@ export function SettingBoard({children}) {
                   </Form.Control>
                   <Form.Control>
                     <Form.InputLabel>seconds</Form.InputLabel>
-                    <Form.Select value={item.secondAfterComplete} onClick={(event) => {
+                    <Form.Select onClick={(event) => {
                       setSecondAfterComplete(event.target.value);
                     }}>
+                      <Form.DisableMenu>{item.secondAfterComplete}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
                     </Form.Select>
                   </Form.Control>
-                  <Styling.Typography>minutes wait</Styling.Typography>
+                  <Form.Control>
+                    <Styling.Typography>minutes wait</Styling.Typography>
+                  </Form.Control>
                 </Form>
                 <Form>
-                  <Styling.Typography>Target Sites</Styling.Typography>
+                  <Form.ControlText>
+                    <Styling.Typography>Target Sites</Styling.Typography>
+                  </Form.ControlText>
                   <Form.Control>
                     <Form.InputLabel>pages</Form.InputLabel>
-                    <Form.Select value={item.targetSite} onClick={(event) => {
+                    <Form.Select onClick={(event) => {
                       setTargetSite(event.target.value);
                     }}>
+                      <Form.DisableMenu>{item.targetSite}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
                     </Form.Select>
                   </Form.Control>
-                  <Styling.Typography>if not found</Styling.Typography>
+                  <Form.ControlText>
+                    <Styling.Typography>if not found</Styling.Typography>
+                  </Form.ControlText>
                   <Form.Control>
                     <Form.InputLabel>minutes</Form.InputLabel>
-                    <Form.Select value={item.minuteTargetNotFound} onClick={(event) => {
-                      setMinuteTargetNotFound(event.target.value);
-                    }}>
-                      <Form.Menu value={10}>10</Form.Menu>
-                      <Form.Menu value={20}>20</Form.Menu>
-                      <Form.Menu value={30}>30</Form.Menu>
-                    </Form.Select>
-                  </Form.Control>
-                </Form>
-                <Form>
-                  <Form.Control>
                     <Form.Select onClick={(event) => {
-                      setAutoreset(event.target.value);
+                      setMinuteTargetNotFound(event.target.value);
                     }}>
                       <Form.DisableMenu>{item.minuteTargetNotFound}</Form.DisableMenu>
                       <Form.Menu value={10}>10</Form.Menu>
                       <Form.Menu value={20}>20</Form.Menu>
                       <Form.Menu value={30}>30</Form.Menu>
                     </Form.Select>
-                    <Form.HelperText>minute</Form.HelperText>
                   </Form.Control>
-                  <Styling.Typography>automatic reset after operation.</Styling.Typography>
+                </Form>
+                <Form>
+                  <Form.Control>
+                    <Form.InputLabel>minutes</Form.InputLabel>
+                    <Form.Select onClick={(event) => {
+                      setAutoreset(event.target.value);
+                    }}>
+                      <Form.DisableMenu>{item.autoreset}</Form.DisableMenu>
+                      <Form.Menu value={10}>10</Form.Menu>
+                      <Form.Menu value={20}>20</Form.Menu>
+                      <Form.Menu value={30}>30</Form.Menu>
+                    </Form.Select>
+                  </Form.Control>
+                  <Form.Control>
+                    <Styling.Typography>automatic reset after operation.</Styling.Typography>
+                  </Form.Control>
+
                 </Form>
               </Styling.PaperInner>
             </Styling.Emptygrid>
@@ -359,10 +385,9 @@ export function SettingBoard({children}) {
                     );
                   })}
             </Styling.Emptygrid>
-
           </Styling.Gridcontainer>
         </Styling.PaperSetting>
-      )};
+      )}
     </Styling>
     </>
   );

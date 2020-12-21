@@ -16,7 +16,7 @@
 		"secondAfterComplete" : 30,
 		"targetSite" : 10,
 		"minuteTargetNotFound" : 10,
-		"autoreset" : 10,
+		"autoreset" : 30,
 		"devicereset" : "false",
 		"vinnReset" : "true",
 		"phoneReset" : "true",

@@ -36,6 +36,7 @@ export default function Home() {
     <ThemeProvider theme={theme}>
       <CssBaseline/>
         <Styling.Grid>
+          <Styling.Grid>
           <Styling.Emptygrid item xs={12}>
             <Styling.Gridcontainer justify="center">
               <KeywordBoard />
@@ -43,6 +44,7 @@ export default function Home() {
               <SettingBoard />
             </Styling.Gridcontainer>
           </Styling.Emptygrid>
+          </Styling.Grid>
         </Styling.Grid>
     </ThemeProvider>
     </>
