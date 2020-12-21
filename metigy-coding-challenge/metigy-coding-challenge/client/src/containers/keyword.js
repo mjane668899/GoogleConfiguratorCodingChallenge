@@ -9,7 +9,7 @@ export function KeywordBoard () {
   const [newKeyword, setNewKeyword] = useState("")
   const [keywordList, setKeywordList] = useState([]);
   const saveKeyword = () => {
-    Axios.post('http://localhost:3001/createkeyword', {
+    Axios.post('http://localhost:8000/createkeyword', {
       keyword: keyword,
     }).then(() => {
       setKeywordList([
@@ -22,12 +22,12 @@ export function KeywordBoard () {
   };
 
   const getKeyword = () => {
-    Axios.get('http://localhost:3001/showkeyword').then((response) => {
+    Axios.get('http://localhost:8000/showkeyword').then((response) => {
       setKeywordList(response.data);
     });
   };
   const updateKeyword = (id) => {
-    Axios.put('http://localhost:3001/updatekeyword', { keyword: keyword, id: id}).then(
+    Axios.put('http://localhost:8000/updatekeyword', { keyword: keyword, id: id}).then(
       (response) => {
         setKeywordList(
           keywordList.map((val) => {
@@ -44,7 +44,7 @@ export function KeywordBoard () {
   };
 
   const deleteKeyword = (id) => {
-    Axios.delete(`http://localhost:3001/deletekeyword/${id}`).then((response) => {
+    Axios.delete(`http://localhost:8000/deletekeyword/${id}`).then((response) => {
       setKeywordList(
         keywordList.filter((val) => {
           return val.id !== id;

@@ -1,27 +1,27 @@
 const express = require('express');
-const app = express();
 const mysql = require('mysql');
 const cors = require('cors');
+require('dotenv').config()
 
+const app = express();
+
+const db = mysql.createPool({
+  host: process.env.MYSQL_HOST_IP,
+  user: process.env.MYSQL_USER,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+});
 app.use(cors());
+
 app.use(express.json());
 
-const PORT = 3080;
-const HOST = '0.0.0.0';
 
-const db = mysql.createConnection({
-  user: 'root',
-  host: 'localhost',
-  password: 'meis9609',
-  database: "userSystem",
-  muiltipleStatement: true
+app.listen(process.env.REACT_APP_SERVER_PORT, () => {
+  console.log(`App server now listening on port ${process.env.REACT_APP_SERVER_PORT}`);
 });
-
-const sql = ""
 
 app.post('/createkeyword', (req, res ) => {
     const keyword = (req.body.keyword);
-
     db.query(
       'INSERT INTO user_keyword (keyword) VALUES (?)', [keyword],
     (err, result) => {
@@ -181,7 +181,3 @@ app.delete('/deletesetting/:id', (req, res) => {
     }
   });
 });
-
-
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
