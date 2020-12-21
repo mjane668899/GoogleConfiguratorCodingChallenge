@@ -1,12 +1,13 @@
 import React from 'react';
 import Axios from 'axios';
 import { useState } from 'react';
-import { Container } from '../components';
+import { Styling } from '../components';
+import keywordData from "../pre-populate/keyword.json";
 
 
 export function KeywordBoard () {
   const [keyword, setKeyword] = useState("");
-  const [newKeyword, setNewKeyword] = useState("")
+  // const [newKeyword, setNewKeyword] = useState("")
   const [keywordList, setKeywordList] = useState([]);
   const saveKeyword = () => {
     Axios.post('http://localhost:8000/createkeyword', {
@@ -26,22 +27,25 @@ export function KeywordBoard () {
       setKeywordList(response.data);
     });
   };
-  const updateKeyword = (id) => {
-    Axios.put('http://localhost:8000/updatekeyword', { keyword: keyword, id: id}).then(
-      (response) => {
-        setKeywordList(
-          keywordList.map((val) => {
-            return val.id === id
-            ? {
-              id: val.id,
-              keyword: newKeyword,
-            }
-            : val;
-          })
-        );
-      }
-    );
-  };
+
+
+  // FOR UPDATE KEYWORD FUNCTION
+  // const updateKeyword = (id) => {
+  //   Axios.put('http://localhost:8000/updatekeyword', { keyword: keyword, id: id}).then(
+  //     (response) => {
+  //       setKeywordList(
+  //         keywordList.map((val) => {
+  //           return val.id === id
+  //           ? {
+  //             id: val.id,
+  //             keyword: newKeyword,
+  //           }
+  //           : val;
+  //         })
+  //       );
+  //     }
+  //   );
+  // };
 
   const deleteKeyword = (id) => {
     Axios.delete(`http://localhost:8000/deletekeyword/${id}`).then((response) => {
@@ -56,33 +60,48 @@ export function KeywordBoard () {
 
   return (
     <>
-    <Container.Emptygrid item>
-      <Container.Title>Keywords</Container.Title>
-      <Container.Paper>
-        <Container.TextField onChange={(event) => {
+    <Styling.Emptygrid item>
+      <Styling.Title>Keywords</Styling.Title>
+      <Styling.Paper>
+        <Styling.TextField onChange={(event) => {
             setKeyword(event.target.value);
           }}
           placeholder="Enter your keywords here">
-        </Container.TextField>
-        <Container.Button onClick={saveKeyword}>ADD</Container.Button>
-        <Container.Button onClick={getKeyword}>SHOW</Container.Button>
-        <div className="keyword">
+        </Styling.TextField>
+        <Styling.Button onClick={saveKeyword}>ADD</Styling.Button>
+        <Styling.Button onClick={getKeyword}>SHOW</Styling.Button>
+        <Styling.Box>
+          {keywordData.map(item =>
+            <Styling.List>
+              <Styling.ListItemtext>
+                <div key={item.id}>
+                  <div>{item.keyword}</div>
+                  <Styling.ListItemSecondaryAction>
+                    <Styling.DeleteButton onClick/>
+                  </Styling.ListItemSecondaryAction>
+                </div>
+              </Styling.ListItemtext>
+            </Styling.List>
+          )}
           {keywordList.map((val, key) => {
             return (
-              <div>
-                {val.keyword}
-                <Container.Button
-                  onClick={() => {
-                    deleteKeyword(val.id);
-                  }}>
-                  Clear
-                </Container.Button>
-              </div>
-            );
-          })}
-        </div>
-      </Container.Paper>
-    </Container.Emptygrid>
-    </>
+              <Styling.List>
+                <Styling.ListItemtext>
+                  <div>
+                    <div>{val.keyword}</div>
+                    <Styling.ListItemSecondaryAction>
+                      <Styling.DeleteButton onClick={() => {
+                          deleteKeyword(val.id);
+                        }}/>
+                      </Styling.ListItemSecondaryAction>
+                    </div>
+                  </Styling.ListItemtext>
+                </Styling.List>
+              );
+            })}
+          </Styling.Box>
+        </Styling.Paper>
+      </Styling.Emptygrid>
+      </>
   );
 }

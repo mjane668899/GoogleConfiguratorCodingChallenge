@@ -1,23 +1,17 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const app = express();
 require('dotenv').config()
 
-const app = express();
-
-const db = mysql.createPool({
-  host: process.env.MYSQL_HOST_IP,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
-});
 app.use(cors());
-
 app.use(express.json());
 
-
-app.listen(process.env.REACT_APP_SERVER_PORT, () => {
-  console.log(`App server now listening on port ${process.env.REACT_APP_SERVER_PORT}`);
+const db = mysql.createPool({
+  user: process.env.MYSQL_USER,
+  host: process.env.MYSQL_HOST_IP,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
 });
 
 app.post('/createkeyword', (req, res ) => {
@@ -158,8 +152,6 @@ app.post('/createsetting', (req, res ) => {
   );
 });
 
-
-
 app.get('/showsetting', ( req, res ) => {
   db.query("SELECT * FROM user_settings",
   (err, result) => {
@@ -180,4 +172,8 @@ app.delete('/deletesetting/:id', (req, res) => {
       res.send(result);
     }
   });
+});
+
+app.listen(8000, () => {
+  console.log(`App server now listening on port 8000`);
 });

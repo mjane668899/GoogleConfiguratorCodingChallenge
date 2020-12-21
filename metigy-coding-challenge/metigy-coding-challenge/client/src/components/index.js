@@ -1,2 +1,2 @@
-export { default as Container } from './container';
+export { default as Styling } from './styling';
 export { default as Form } from './form';

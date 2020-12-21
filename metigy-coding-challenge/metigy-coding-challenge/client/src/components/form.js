@@ -1,16 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { Checkbox } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -66,28 +63,10 @@ export default function Form ({ children, ...restProps }) {
 }
 
 Form.Group = function Formgroup ({ children, ...restProps }) {
-  const [spacing] = React.useState(2);
-  const [age, setAge] = React.useState('');
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
-  });
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-  const classes = useStyles();
   return <FormGroup row>{children}</FormGroup>;
 };
 
 Form.Control= function Formcontrol ({ children, ...restProps }) {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
-  });
   const classes = useStyles();
   return <FormControl className={classes.formControl} {...restProps}>{children}</FormControl>;
 };
@@ -111,6 +90,7 @@ Form.InputLabel = function ForminputLabel ({ children, ...restProps }) {
 Form.Select = function FormSelect ({ children, ...restProps }) {
   const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const classes = useStyles();
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -124,10 +104,18 @@ Form.Select = function FormSelect ({ children, ...restProps }) {
   };
 
   return <Select labelId="demo-simple-select-label"
-  id="demo-simple-select" open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange} value={age}
+  id="demo-simple-select" open={open} onClose={handleClose} onOpen={handleOpen} onChange={handleChange} value={age} displayEmpty className={classes.selectEmpty} inputProps={{ 'aria-label': 'Without label' }}
   {...restProps}>{children}</Select>
 };
 
 Form.Menu = function FormMenu ({ children, ...restProps }) {
   return <MenuItem value="" {...restProps}>{children}</MenuItem>
+};
+
+Form.DisableMenu = function FormDisableMenu ({ children, ...restProps }) {
+  return <MenuItem value="" disabled {...restProps}>{children}</MenuItem>
+};
+
+Form.HelperText = function FormHelperText1 ({ children, ...restProps }) {
+  return <FormHelperText {...restProps}>{children}</FormHelperText>
 };

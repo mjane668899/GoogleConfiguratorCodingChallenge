@@ -8,16 +8,28 @@ x-common-variables: &common-variables
 services:
   mysql:
     image: mysql:8.0.22
+    command: --default-authentication-plugin=mysql_native_password
     container_name: mysql_container
     environment:
       <<: *common-variables
-      MYSQL_HOST: localhost
+      MYSQL_HOST: 127.0.0.1
       MYSQL_ROOT_PASSWORD: root
     ports:
       - 3306:3306
     restart: unless-stopped
     volumes:
       - ./db/userSystem.sql:/docker-entrypoint-initdb.d/userSystem.sql
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    links:
+      - mysql:mysql
+    ports:
+      - 8080:80
+    restart: always
   server:
     build: ./server
     depends_on:
@@ -32,7 +44,7 @@ services:
     volumes:
       - ./server:/app
     links:
-      - mysql
+      - mysql:mysql
     command: yarn start
   client:
     build: ./client
